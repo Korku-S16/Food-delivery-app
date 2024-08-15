@@ -1,9 +1,9 @@
-import React from "react";
 import { pizzas } from "@/data";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-const page = () => {
+const CategoryPage = () => {
   return (
     <div className="flex flex-wrap text-red-500">
       {pizzas.map((item) => (
@@ -14,11 +14,11 @@ const page = () => {
               <Image src={item.img} alt="" fill className="object-contain"/>
             </div>
           )}
-          {/* Text xontainer */}
-          <div className="flex justify-between uppercase items-center group">
-            <h1 className="font-bold ">{item.title}</h1>
-            <h1 className="group-hover:hidden">${item.price}</h1>
-            <button className= " hidden group-hover:block bg-red-500 text-white p-2 rounded">Add to cart</button>
+          {/* TEXT CONTAINER */}
+          <div className="flex items-center justify-between font-bold">
+            <h1 className="text-2xl uppercase p-2">{item.title}</h1>
+            <h2 className="group-hover:hidden text-xl">${item.price}</h2>
+            <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">Add to Cart</button>
           </div>
         </Link>
       ))}
@@ -26,7 +26,4 @@ const page = () => {
   );
 };
 
-export default page;
-
-
-// Maan lo ki aapke paas ek card hai aur aap chahte ho ki jab aap uspar hover karo, toh card ke andar ka text bhi change ho jaye.
+export default CategoryPage;

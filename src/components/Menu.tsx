@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 import CartIcon from "./CartIcon";
@@ -14,42 +13,73 @@ const links = [
 ];
 
 const Menu = () => {
-  const [open, setopen] = useState(false);
-  const user =false
+  const [open, setOpen] = useState(false);
+
+  // TEMPORARY
+  const user = false;
   return (
     <div>
-      {!open ? (
+      {/* LONG WAY */}
+      {/* {!open ? (
         <Image
           src="/open.png"
-          alt="open"
+          alt=""
           width={20}
           height={20}
-          onClick={() => setopen(true)}
+          onClick={() => setOpen(true)}
         />
       ) : (
         <Image
           src="/close.png"
-          alt="open"
+          alt=""
           width={20}
           height={20}
-          onClick={() => setopen(false)}
+          onClick={() => setOpen(false)}
         />
-      )}
-      {open &&<div className="bg-red-500 text-white absolute left-0 top-23 h-[calc(100vh-6rem)] flex items-center justify-center flex-col gap-8 w-full z-10">
-        {links.map((items) => (
-          <Link href={items.url} key={items.id} onClick={() => setopen(false)}>
-            {items.title}
-          </Link>
-        ))}
-        {!user ?(<Link href="/login" onClick={() => setopen(false)} > Login</Link>):(
-        <Link href="/orders"onClick={() => setopen(false)}  > orders</Link>)}
-        <Link href="/cart" onClick={() => setopen(false)}>
-          <CartIcon />
-        </Link>
+      )} */}
+      
+      {/* SHORTCUT */}
+      <Image
+        src={open ? "/close.png" : "/open.png"}
+        alt=""
+        width={20}
+        height={20}
+        onClick={() => setOpen(!open)}
+        className="cursor-pointer"
+      />
+      {open && (
+        <div className="bg-red-500 text-white absolute left-0 top-24 w-full h-[calc(100vh-6rem)] flex flex-col gap-8 items-center justify-center text-3xl z-10">
+          {links.map((item) => (
+            <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
+              {item.title}
+            </Link>
+          ))}
 
-      </div>}
+          {/* LONG WAY */}
+          {/* {!user ? (
+            <Link href="/login" onClick={() => setOpen(false)}>
+              Login
+            </Link>
+          ) : (
+            <Link href="/orders" onClick={() => setOpen(false)}>
+              Orders
+            </Link>
+          )} */}
+
+          {/* SHORTCUT */}
+          <Link
+            href={user ? "/orders" : "login"}
+            onClick={() => setOpen(false)}
+          >
+            {user ? "Orders" : "Login"}
+          </Link>
+          <Link href="/cart" onClick={() => setOpen(false)}>
+            <CartIcon />
+          </Link>
+        </div>
+      )}
     </div>
   );
-}; 
+};
 
 export default Menu;
